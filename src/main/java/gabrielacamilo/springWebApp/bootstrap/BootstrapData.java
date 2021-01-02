@@ -2,8 +2,10 @@ package gabrielacamilo.springWebApp.bootstrap;
 
 import gabrielacamilo.springWebApp.domain.Author;
 import gabrielacamilo.springWebApp.domain.Book;
+import gabrielacamilo.springWebApp.domain.Publisher;
 import gabrielacamilo.springWebApp.repositories.AuthorRepository;
 import gabrielacamilo.springWebApp.repositories.BookRepository;
+import gabrielacamilo.springWebApp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +17,12 @@ public class BootstrapData implements CommandLineRunner {
     /* Dependency Injection */
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
 
-    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -45,8 +49,14 @@ public class BootstrapData implements CommandLineRunner {
 
         //------------------------------------------------
 
-        System.out.println("Started in Bootstrap");
-        System.out.println("Number of Books: " + bookRepository.count());
+        Publisher addison = new Publisher("Addison-Wesley Professional", "Rua dos bobos nro 0");
+        publisherRepository.save(addison);
+
+        System.out.println(publisherRepository.findAll());
+
+
+//        System.out.println("Started in Bootstrap");
+//        System.out.println("Number of Books: " + bookRepository.count());
 
     }
 }
