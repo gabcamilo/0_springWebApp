@@ -1,9 +1,6 @@
 package gabrielacamilo.springWebApp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -16,6 +13,9 @@ public class Author {
 
     private String firstName;
     private String lastName;
+
+    /*Author has a many-to-many relationship to books to be mapped by authors*/
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Author() {
